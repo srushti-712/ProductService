@@ -15,5 +15,5 @@ public class CreateProductRequestDto {
     private String description;
     private double price;
     private String image;
-    private Category category;
+    private String category;
 }

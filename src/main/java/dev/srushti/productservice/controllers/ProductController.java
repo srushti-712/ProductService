@@ -42,13 +42,24 @@ public class ProductController {
     } => payload / request body
     POST /products
      */
-    @PostMapping
+    @PostMapping("/products")
     public Product createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
-        return null;
+
+        return productService.createProduct(createProductRequestDto.getTitle(),
+                createProductRequestDto.getDescription(),
+                createProductRequestDto.getPrice(),
+                createProductRequestDto.getImage(),
+                createProductRequestDto.getCategory());
     }
 
-    public Product updateProduct(Product product) {
-        return null;
+    @PutMapping("/products/{id}")
+    public Product updateProduct(@RequestBody CreateProductRequestDto createProductRequestDto, @PathVariable("id") int id) {
+        return productService.replaceProduct(createProductRequestDto.getTitle(),
+                createProductRequestDto.getDescription(),
+                createProductRequestDto.getPrice(),
+                createProductRequestDto.getImage(),
+                createProductRequestDto.getCategory(),
+                id);
     }
 
 }

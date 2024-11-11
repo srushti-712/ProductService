@@ -8,5 +8,16 @@ public interface ProductService {
     List<Product> getAllProducts();
 
     Product getSingleProduct(long id);
-    Product createProduct(CreateProductRequestDto createProductRequestDto);
+    Product createProduct(String title,
+                          String description,
+                          double price,
+                          String imageUrl,
+                          String category);
+
+    Product replaceProduct(String title,
+                          String description,
+                          double price,
+                          String imageUrl,
+                          String category,
+                          int id);
 }

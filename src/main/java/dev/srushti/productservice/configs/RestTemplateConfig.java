@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class RestTemplateConfig {
-    @Bean
+    @Bean  //annotates a method that returns a obj you want to put in Application context
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
