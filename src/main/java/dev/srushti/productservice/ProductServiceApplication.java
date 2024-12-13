@@ -8,10 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProductServiceApplication {
 
     public static void main(String[] args) {
+        Product p1 = new Product();
+
         SpringApplication.run(ProductServiceApplication.class, args);
-        Product p1  = new Product();
-        p1.getPrice();
-        p1.getDescription();
     }
 
 }

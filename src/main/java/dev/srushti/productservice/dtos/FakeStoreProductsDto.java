@@ -30,7 +30,7 @@ public class FakeStoreProductsDto {
         category1.setTitle(category);
 
         product.setCategory(category1);
-        product.setImageUrl(image);
+        product.setImage_url(image);
         return product;
 
     }

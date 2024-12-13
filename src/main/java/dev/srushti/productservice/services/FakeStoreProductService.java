@@ -1,18 +1,20 @@
 package dev.srushti.productservice.services;
 
-import dev.srushti.productservice.dtos.CreateProductRequestDto;
 import dev.srushti.productservice.dtos.FakeStoreProductsDto;
+import dev.srushti.productservice.exceptions.ProductNotFoundException;
 import dev.srushti.productservice.models.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpEntity;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("fakeStore")
 public class FakeStoreProductService implements ProductService {
     private final RestTemplate restTemplate;
 
@@ -33,8 +35,11 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getSingleProduct(long id) {
+    public Product getSingleProduct(long id) throws ProductNotFoundException{
         FakeStoreProductsDto fakeStoreProductsDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductsDto.class);
+        if(fakeStoreProductsDto == null) {
+            throw new ProductNotFoundException("Product with id "+ id + " is not present with the service. It's an invalid Id.");
+        }
         return fakeStoreProductsDto.toProduct();
     }
 
@@ -71,5 +76,10 @@ public class FakeStoreProductService implements ProductService {
         Product product = fakeStoreProductsDtoResponseEntity.getBody().toProduct();
         product.setId(id);
         return product;
+    }
+
+    @Override
+    public Page<Product> getAllProductsPaginated(int pageNumber, int pageSize) {
+        return null;
     }
 }
